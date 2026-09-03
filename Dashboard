@@ -1,0 +1,987 @@
+[
+    {
+        "id": "bd34992c59d31415",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9ef04829e2bbd301",
+        "type": "json",
+        "z": "bd34992c59d31415",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 250,
+        "y": 260,
+        "wires": [
+            [
+                "89c720d0b55d5246",
+                "df6f01af51beabc4"
+            ]
+        ]
+    },
+    {
+        "id": "89c720d0b55d5246",
+        "type": "function",
+        "z": "bd34992c59d31415",
+        "name": "function 1",
+        "func": "let data = msg.payload;\n\nif (typeof data === \"string\") {\n    try {\n        data = JSON.parse(data);\n    } catch (e) {\n        return null;\n    }\n}\n\nreturn [\n    { payload: data.north },\n    { payload: data.south },\n    { payload: data.east },\n    { payload: data.west }\n];",
+        "outputs": 4,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 60,
+        "wires": [
+            [
+                "8db404baae9f30f4"
+            ],
+            [
+                "86a03a0e1b74340d"
+            ],
+            [
+                "ec9cb0638dfc6acf"
+            ],
+            [
+                "587c8d6b6b1a710f"
+            ]
+        ]
+    },
+    {
+        "id": "393d9697eed4eb1b",
+        "type": "inject",
+        "z": "bd34992c59d31415",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{   \"north\": 80,   \"south\": 60,   \"east\": 30,   \"west\": 20 }",
+        "payloadType": "json",
+        "x": 110,
+        "y": 260,
+        "wires": [
+            [
+                "9ef04829e2bbd301"
+            ]
+        ]
+    },
+    {
+        "id": "8db404baae9f30f4",
+        "type": "ui_gauge",
+        "z": "bd34992c59d31415",
+        "name": "",
+        "group": "8dfb9902b7de5bf9",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "North",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 630,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "86a03a0e1b74340d",
+        "type": "ui_gauge",
+        "z": "bd34992c59d31415",
+        "name": "",
+        "group": "8dfb9902b7de5bf9",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "South",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 630,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "ec9cb0638dfc6acf",
+        "type": "ui_gauge",
+        "z": "bd34992c59d31415",
+        "name": "",
+        "group": "8dfb9902b7de5bf9",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "East",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 630,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "587c8d6b6b1a710f",
+        "type": "ui_gauge",
+        "z": "bd34992c59d31415",
+        "name": "",
+        "group": "8dfb9902b7de5bf9",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "West",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 630,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "eef0c62a239281bd",
+        "type": "mqtt in",
+        "z": "bd34992c59d31415",
+        "name": "",
+        "topic": "smarttraffic/intersection01/status",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "482ef279c68da29a",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 80,
+        "wires": [
+            [
+                "89c720d0b55d5246",
+                "df6f01af51beabc4"
+            ]
+        ]
+    },
+    {
+        "id": "8378f30fa78dbc63",
+        "type": "inject",
+        "z": "bd34992c59d31415",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{   \"phase\": \"NS_GREEN\",   \"mode\": \"ADAPTIVE\" }",
+        "payloadType": "json",
+        "x": 110,
+        "y": 320,
+        "wires": [
+            [
+                "de9542c776e42b8e"
+            ]
+        ]
+    },
+    {
+        "id": "de9542c776e42b8e",
+        "type": "function",
+        "z": "bd34992c59d31415",
+        "name": "Active Phase",
+        "func": "if (msg.payload.phase === \"NS_GREEN\") {\n    msg.payload = \"🟢 NORTH + SOUTH\";\n} else if (msg.payload.phase === \"EW_GREEN\") {\n    msg.payload = \"🟢 EAST + WEST\";\n} else if (msg.payload.phase === \"NS_YELLOW\") {\n    msg.payload = \"🟡 NORTH + SOUTH\";\n} else if (msg.payload.phase === \"EW_YELLOW\") {\n    msg.payload = \"🟡 EAST + WEST\";\n} else if (msg.payload.phase === \"ALL_RED\") {\n    msg.payload = \"🔴 ALL RED\";\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 250,
+        "y": 320,
+        "wires": [
+            [
+                "97ee354a5d252852"
+            ]
+        ]
+    },
+    {
+        "id": "97ee354a5d252852",
+        "type": "ui_text",
+        "z": "bd34992c59d31415",
+        "group": "607e35aa24724c69",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "Active Phase",
+        "label": "Active Phase",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 450,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "7dc130d17e72fded",
+        "type": "ui_text",
+        "z": "bd34992c59d31415",
+        "group": "607e35aa24724c69",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "Mode",
+        "label": "Mode",
+        "format": "⚙️ ADAPTIVE MODE",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1070,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "fc9fdb74812f3e61",
+        "type": "ui_text",
+        "z": "bd34992c59d31415",
+        "group": "607e35aa24724c69",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "Countdown",
+        "label": "Countdown",
+        "format": "⏱ 10 seconds",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 890,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "002e57805b4ca063",
+        "type": "inject",
+        "z": "bd34992c59d31415",
+        "name": "Diagnostic Test",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{   \"health\": \"HEALTHY\",   \"fault\": \"NONE\" }",
+        "payloadType": "json",
+        "x": 140,
+        "y": 460,
+        "wires": [
+            [
+                "cd0e1b39660aa056",
+                "1925111c50fc5d0b",
+                "cb3645156e9927cc"
+            ]
+        ]
+    },
+    {
+        "id": "cd0e1b39660aa056",
+        "type": "ui_text",
+        "z": "bd34992c59d31415",
+        "group": "ae324659410aa6c9",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": " Health",
+        "label": "Health",
+        "format": "{{msg.payload.health}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 350,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "8eae77d622ae3e71",
+        "type": "ui_chart",
+        "z": "bd34992c59d31415",
+        "name": "",
+        "group": "8dfb9902b7de5bf9",
+        "order": 5,
+        "width": "6",
+        "height": "8",
+        "label": "Traffic Trend",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 650,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e11fd15958607e36",
+        "type": "ui_button",
+        "z": "bd34992c59d31415",
+        "name": "Send Emergency",
+        "group": "a873816ff796ff10",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "SEND EMERGENCY",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"cmd\":\"EMERGENCY\",\"value\":\"NORTH\"}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 110,
+        "y": 660,
+        "wires": [
+            [
+                "31435002f467e9a4",
+                "1c48d2f9cb15b42b"
+            ]
+        ]
+    },
+    {
+        "id": "03cfadd3313729ef",
+        "type": "ui_button",
+        "z": "bd34992c59d31415",
+        "name": "Clear Emergency",
+        "group": "a873816ff796ff10",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "CLEAR EMERGENCY",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"cmd\":\"CLEAR_EMERGENCY\"}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 110,
+        "y": 700,
+        "wires": [
+            [
+                "31435002f467e9a4"
+            ]
+        ]
+    },
+    {
+        "id": "31435002f467e9a4",
+        "type": "debug",
+        "z": "bd34992c59d31415",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "1c48d2f9cb15b42b",
+        "type": "mqtt out",
+        "z": "bd34992c59d31415",
+        "name": "Emergency Command",
+        "topic": "smarttraffic/intersection01/command",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "482ef279c68da29a",
+        "x": 680,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "1925111c50fc5d0b",
+        "type": "ui_text",
+        "z": "bd34992c59d31415",
+        "group": "ae324659410aa6c9",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "Fault",
+        "label": "Fault",
+        "format": "{{msg.payload.fault}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 350,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "df6f01af51beabc4",
+        "type": "function",
+        "z": "bd34992c59d31415",
+        "name": "function 2",
+        "func": "let data = msg.payload;\n\nif (typeof data === \"string\") {\n    try {\n        data = JSON.parse(data);\n    } catch (e) {\n        return null;\n    }\n}\n\nlet ns = (Number(data.north) + Number(data.south)) / 2;\nlet ew = (Number(data.east) + Number(data.west)) / 2;\n\nreturn [\n    {\n        topic: \"NS Demand\",\n        payload: ns\n    },\n    {\n        topic: \"EW Demand\",\n        payload: ew\n    }\n];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 140,
+        "wires": [
+            [
+                "8eae77d622ae3e71"
+            ],
+            [
+                "8eae77d622ae3e71"
+            ]
+        ]
+    },
+    {
+        "id": "cb3645156e9927cc",
+        "type": "ui_text",
+        "z": "bd34992c59d31415",
+        "group": "ae324659410aa6c9",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "Alert",
+        "label": "Alert",
+        "format": " {{msg.payload.fault}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 350,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "adda593289b6267b",
+        "type": "inject",
+        "z": "bd34992c59d31415",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{   \"device\": \"ONLINE\",   \"mqtt\": \"CONNECTED\" }",
+        "payloadType": "json",
+        "x": 90,
+        "y": 940,
+        "wires": [
+            [
+                "b27b3a09ab72647b"
+            ]
+        ]
+    },
+    {
+        "id": "b27b3a09ab72647b",
+        "type": "function",
+        "z": "bd34992c59d31415",
+        "name": "Device Status",
+        "func": "let data = msg.payload;\n\nif (typeof data === \"string\") {\n    try {\n        data = JSON.parse(data);\n    } catch (e) {\n        return null;\n    }\n}\n\nmsg.payload = \"🟢 Device: \" + data.device + \" | MQTT: \" + data.mqtt;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 940,
+        "wires": [
+            [
+                "ad41d50ec62778b5"
+            ]
+        ]
+    },
+    {
+        "id": "ad41d50ec62778b5",
+        "type": "ui_text",
+        "z": "bd34992c59d31415",
+        "group": "607e35aa24724c69",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "Device Status",
+        "label": "Device Status",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 620,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "a2f9a2147c4137e4",
+        "type": "ui_table",
+        "z": "bd34992c59d31415",
+        "group": "1f0ef3b8bf0ba229",
+        "name": "Sensor Diagnostics",
+        "order": 0,
+        "width": "5",
+        "height": "4",
+        "columns": [
+            {
+                "field": "sensor",
+                "title": "sensor",
+                "width": "",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "value",
+                "title": "value",
+                "width": "",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "age",
+                "title": "Age",
+                "width": "",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "health",
+                "title": "Health",
+                "width": "",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "fault",
+                "title": "Fault",
+                "width": "",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            }
+        ],
+        "outputs": 0,
+        "cts": false,
+        "x": 610,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "5a5a702b8b108f54",
+        "type": "inject",
+        "z": "bd34992c59d31415",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 1020,
+        "wires": [
+            [
+                "ee8beb4ad34bbee4"
+            ]
+        ]
+    },
+    {
+        "id": "ee8beb4ad34bbee4",
+        "type": "function",
+        "z": "bd34992c59d31415",
+        "name": "Build Diagnostics",
+        "func": "\nmsg.payload = [\n    {\n        sensor: \"North\",\n        value: \"80%\",\n        age: \"2s\",\n        health: \"OK\",\n        fault: \"NONE\"\n    },\n    {\n        sensor: \"South\",\n        value: \"60%\",\n        age: \"2s\",\n        health: \"OK\",\n        fault: \"NONE\"\n    },\n    {\n        sensor: \"East\",\n        value: \"30%\",\n        age: \"2s\",\n        health: \"OK\",\n        fault: \"NONE\"\n    },\n    {\n        sensor: \"West\",\n        value: \"20%\",\n        age: \"2s\",\n        health: \"OK\",\n        fault: \"NONE\"\n    }\n];\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 1020,
+        "wires": [
+            [
+                "a2f9a2147c4137e4"
+            ]
+        ]
+    },
+    {
+        "id": "d69c4dac217f4f31",
+        "type": "ui_button",
+        "z": "bd34992c59d31415",
+        "name": "Force Fixed Mode",
+        "group": "f5b50641e2a42365",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "🔧 FORCE FIXED MODE",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"cmd\":\"SET_MODE\",\"value\":\"FIXED\"}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 110,
+        "y": 840,
+        "wires": [
+            [
+                "1c48d2f9cb15b42b",
+                "31435002f467e9a4"
+            ]
+        ]
+    },
+    {
+        "id": "8be09d4ec24e1cfe",
+        "type": "ui_button",
+        "z": "bd34992c59d31415",
+        "name": "Resume Adaptive",
+        "group": "f5b50641e2a42365",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "✅ RESUME ADAPTIVE",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"cmd\":\"SET_MODE\",\"value\":\"ADAPTIVE\"}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 110,
+        "y": 880,
+        "wires": [
+            [
+                "1c48d2f9cb15b42b",
+                "31435002f467e9a4"
+            ]
+        ]
+    },
+    {
+        "id": "90f8bb922ce32264",
+        "type": "ui_button",
+        "z": "bd34992c59d31415",
+        "name": "Clear Fault",
+        "group": "f5b50641e2a42365",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "🧹 CLEAR FAULT",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"cmd\":\"CLEAR_FAULT\"}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 90,
+        "y": 800,
+        "wires": [
+            [
+                "1c48d2f9cb15b42b",
+                "31435002f467e9a4"
+            ]
+        ]
+    },
+    {
+        "id": "095e4b4c82be194b",
+        "type": "debug",
+        "z": "bd34992c59d31415",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 440,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "8dfb9902b7de5bf9",
+        "type": "ui_group",
+        "name": "🚗Traffic",
+        "tab": "3e120b1edb2a6f9f",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "482ef279c68da29a",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.hivemq.com",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "607e35aa24724c69",
+        "type": "ui_group",
+        "name": "🚦Active Status",
+        "tab": "3e120b1edb2a6f9f",
+        "order": 4,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "ae324659410aa6c9",
+        "type": "ui_group",
+        "name": "🩺 SYSTEM HEALTH",
+        "tab": "3e120b1edb2a6f9f",
+        "order": 5,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "a873816ff796ff10",
+        "type": "ui_group",
+        "name": "🚨Send Emergency",
+        "tab": "3e120b1edb2a6f9f",
+        "order": 6,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "1f0ef3b8bf0ba229",
+        "type": "ui_group",
+        "name": "Diagnostics",
+        "tab": "3e120b1edb2a6f9f",
+        "order": 6,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f5b50641e2a42365",
+        "type": "ui_group",
+        "name": "System Controls",
+        "tab": "3e120b1edb2a6f9f",
+        "order": 7,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "3e120b1edb2a6f9f",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "fd807c9d3a016578",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6",
+            "node-red-node-ui-table": "0.4.5"
+        }
+    }
+]
